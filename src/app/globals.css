@@ -1,26 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
 @import "tailwindcss";
 
 :root {
+  --brand: #e19620;
+  --brand-dark: #414141;
+  --brand-muted: #9ca3af;
+  --brand-secondary: #4b5563;
   --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f8f9fa;
+  --foreground: #414141;
+  --border: #e5e7eb;
 }
 
 @theme inline {
+  --color-brand: #e19620;
+  --color-brand-dark: #414141;
+  --color-brand-muted: #9ca3af;
+  --color-brand-secondary: #4b5563;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-primary: #e19620;
+  --color-primary-foreground: #ffffff;
+  --font-sans: var(--font-outfit), "Outfit", sans-serif;
+  --font-serif: var(--font-prata), "Prata", serif;
+  --font-open-sans: var(--font-open-sans-loaded), "Open Sans", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.prata-regular {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.open-sans {
+  font-family: var(--font-open-sans);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
