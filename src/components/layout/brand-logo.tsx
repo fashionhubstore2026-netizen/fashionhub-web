@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 type BrandLogoProps = {
@@ -6,42 +7,33 @@ type BrandLogoProps = {
   size?: 'sm' | 'md' | 'lg';
 };
 
-const sizeClasses = {
-  sm: 'text-base',
-  md: 'text-lg',
-  lg: 'text-xl',
+const sizeHeights = {
+  sm: 25,
+  md: 22,
+  lg: 40,
 };
 
 export function BrandLogo({ href = '/', className = '', size = 'md' }: BrandLogoProps) {
-  const logo = (
-    <span
-      className={`inline-flex items-baseline font-sans font-semibold tracking-[0.12em] ${sizeClasses[size]} ${className}`}
-      aria-label="FashionHub"
-    >
-      <span className="text-brand-dark">FASHION</span>
-      <span className="relative text-brand">
-        H
-        <span className="relative inline-block">
-          <span
-            className="absolute -top-[0.55em] left-1/2 -translate-x-1/2 text-[0.55em] leading-none text-brand"
-            aria-hidden
-          >
-            ^
-          </span>
-          U
-        </span>
-        B
-      </span>
-    </span>
+  const height = sizeHeights[size];
+  const image = (
+    <Image
+      src="/logo.png"
+      alt="FashionHub"
+      width={Math.round(height * 3.2)}
+      height={height}
+      className={`h-auto w-auto object-contain ${className}`}
+      style={{ maxHeight: height, width: 'auto', height: 'auto' }}
+      priority
+    />
   );
 
   if (href) {
     return (
       <Link href={href} className="inline-flex shrink-0 items-center">
-        {logo}
+        {image}
       </Link>
     );
   }
 
-  return <div className="inline-flex shrink-0 items-center">{logo}</div>;
+  return <div className="inline-flex shrink-0 items-center">{image}</div>;
 }

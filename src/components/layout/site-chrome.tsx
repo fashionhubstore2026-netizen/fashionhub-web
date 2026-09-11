@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Search, X, Menu, ChevronLeft, Heart, ShoppingBag } from 'lucide-react';
 import { BrandLogo } from '@/components/layout/brand-logo';
@@ -35,6 +35,7 @@ function NavItem({ href, label, active }: { href: string; label: string; active:
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -181,6 +182,10 @@ export function Header() {
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Escape') closeSearch();
+              if (e.key === 'Enter' && searchQuery.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                closeSearch();
+              }
             }}
             placeholder="Search"
             className="flex-1 bg-inherit text-sm text-brand-dark outline-none placeholder:text-brand-muted"

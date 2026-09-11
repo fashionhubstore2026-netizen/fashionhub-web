@@ -29,14 +29,12 @@ export default function LoginPage() {
 
     setIsSendingOtp(true);
     try {
-      const res = await api.post<{ expiresIn: number; devOtp?: string }>('/customer/send-otp', {
+      await api.post('/customer/send-otp', {
         phone: trimmed,
         countryCode: '91',
       });
       setOtpSent(true);
-      toast.success(
-        res.data?.devOtp ? `OTP sent. Dev code: ${res.data.devOtp}` : 'OTP sent to your phone',
-      );
+      toast.success('OTP sent to your phone');
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Failed to send OTP');
     } finally {
